@@ -26,7 +26,7 @@ window.onload = function () {
     inputTitle.addEventListener("blur", () => {
         switch (true) {
             case !inputTitle.value.trim():
-                titleErrors.innerText = "El campo título no puede estar vacío";
+                titleErrors.innerText = "El campo Título no puede estar vacío";
                 inputTitle.classList.add("is-invalid");
 
                 break;
@@ -44,7 +44,7 @@ window.onload = function () {
     inputRating.addEventListener("blur", () => {
         switch (true) {
             case !inputRating.value.trim():
-                ratingErrors.innerText = "El campo calificación no puede estar vacío";
+                ratingErrors.innerText = "El campo Calificación no puede estar vacío";
                 inputRating.classList.add("is-invalid");
                 break;
             case (inputRating.value <= 0 || inputRating.value > 10.0):
@@ -61,7 +61,7 @@ window.onload = function () {
     inputAwards.addEventListener("blur", () => {
         switch (true) {
             case !inputAwards.value.trim():
-                awardsErrors.innerText = "El campo premios no puede estar vacío";
+                awardsErrors.innerText = "El campo Premios no puede estar vacío";
                 inputAwards.classList.add("is-invalid");
                 break;
             case (inputAwards.value <= 0 || inputAwards.value > 10):
@@ -78,7 +78,7 @@ window.onload = function () {
     inputReleaseDate.addEventListener("blur", () => {
         switch (true) {
             case !inputReleaseDate.value.trim():
-                releaseDateErrors.innerText = "El campo fecha de creación no puede estar vacío";
+                releaseDateErrors.innerText = "El campo Fecha de creación no puede estar vacío";
                 inputReleaseDate.classList.add("is-invalid");
                 break;
             default:
@@ -91,7 +91,7 @@ window.onload = function () {
     inputLength.addEventListener("blur", () => {
         switch (true) {
             case !inputLength.value.trim():
-                lengthErrors.innerText = "El campo duración no puede estar vacío";
+                lengthErrors.innerText = "El campo Duración no puede estar vacío";
                 inputLength.classList.add("is-invalid");
                 break;
             case (inputLength.value <= 60 && inputLength.value > 360):
@@ -108,7 +108,7 @@ window.onload = function () {
     inputGenre.addEventListener("blur", () => {
         switch (true) {
             case !inputGenre.value.trim():
-                genreErrors.innerText = "El campo género no puede estar vacío";
+                genreErrors.innerText = "El campo Género no puede estar vacío";
                 inputGenre.classList.add("is-invalid");
                 break;
             default:
@@ -121,6 +121,15 @@ window.onload = function () {
 
     form.addEventListener("submit", (e) => {
         e.preventDefault();
+        const FORM_ELEMENTS = e.target.elements;
+
+        for (let index = 0; index < FORM_ELEMENTS.length - 1; index++) {
+            const element = FORM_ELEMENTS[index];
+            console.log(element);
+            if (element.value === "") {
+                element.classList.add("is-invalid");
+            }
+        };
 
         let elementosConErrores = document.querySelectorAll(".is-invalid");
         let errores = elementosConErrores.length > 0;
@@ -130,9 +139,13 @@ window.onload = function () {
             for (let i = 0; i < elementosConErrores.length ; i++) {
                 const element = elementosConErrores[i];
                 
-                if (element.nextElementSibling.textContent ||element.value === "" ) {
+                if (element.nextElementSibling.textContent ) {
                     element.classList.add("is-invalid")
-                    listaErrores.innerHTML += (`<li">"${element.nextElementSibling.textContent}"</li><br>`)
+                    listaErrores.innerHTML += (`<li>${element.nextElementSibling.textContent}</li><br>`)
+                }
+                else if(element.value === ""){
+                    listaErrores.innerHTML += (`<li>El campo ${element.attributes.nick.nodeValue} no puede estar vacío</li><br>`)
+
                 }
             }        
         } else {
