@@ -121,15 +121,6 @@ window.onload = function () {
 
     form.addEventListener("submit", (e) => {
         e.preventDefault();
-        const FORM_ELEMENTS = e.target.elements;
-
-        /*for (let index = 0; index < FORM_ELEMENTS.length - 1; index++) {
-            const element = FORM_ELEMENTS[index];
-            console.log(element);
-            if (element.value === "" /*&& element.type !== "file") {
-                element.classList.add("is-invalid")
-            }
-        }*/
 
         let elementosConErrores = document.querySelectorAll(".is-invalid");
         let errores = elementosConErrores.length > 0;
@@ -142,12 +133,11 @@ window.onload = function () {
                 if (element.nextElementSibling.textContent ||element.value === "" ) {
                     element.classList.add("is-invalid")
                     listaErrores.innerHTML += (`<li">"${element.nextElementSibling.textContent}"</li>`)
-                    listaErrores.innerHTML += (`<br>`)
                 }
             }        
         } else {
             alert("La película se guardó satisfactoriamente");
-            form.submit()
+            form.submit();
         }
     })
 
