@@ -132,7 +132,7 @@ window.onload = function () {
                 
                 if (element.nextElementSibling.textContent ||element.value === "" ) {
                     element.classList.add("is-invalid")
-                    listaErrores.innerHTML += (`<li">"${element.nextElementSibling.textContent}"</li>`)
+                    listaErrores.innerHTML += (`<li">"${element.nextElementSibling.textContent}"</li><br>`)
                 }
             }        
         } else {
